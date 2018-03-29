@@ -9,8 +9,23 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
+var t = require('tcomb-form-native');
+var http = require('./utils/http');
+
+var Form = t.form.Form;
+
+// here we are: define your domain model
+var Person = t.struct({
+  name: t.String,              // a required string
+  email: t.String,  // an optional string
+  password: t.String,
+  rememberMe: t.Boolean        // a boolean
+});
+
+var options = {};
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -21,38 +36,84 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+
+  constructor() {
+    super();
+    // 初始状态
+    this.state = {};
+    this.onLogin = this.onLogin.bind(this);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        {/* display */}
+        <Form
+          ref="form"
+          type={Person}
+          options={this.state.options}
+          value={this.state.value}
+        />
+        <View style={{flex:1, flexDirection: 'row'}}>
+          <TouchableHighlight style={styles.button} onPress={this.onLogin} underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={this.onSignup} underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>Signup</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
+  }
+
+  onLogin() {
+    // window.
+    var value = this.refs.form.getValue();
+    var body = {
+      username: value.name,
+      password: value.password
+    }
+    var data = {
+      body: body,
+      method: 'POST'
+    }
+    if (value) {
+      http.httpRequest('/users/login', data);
+    }
+  }
+
+  onSignup() {
+
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    marginTop: 50,
+    padding: 20,
+    backgroundColor: '#ffffff',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  title: {
+    fontSize: 30,
+    alignSelf: 'center',
+    marginBottom: 30
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   },
+  button: {
+    flex:1,
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#FFFFFF',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'baseline',
+    justifyContent: 'space-around',
+    width: 10
+  }
 });
