@@ -11,8 +11,12 @@ exports.httpRequest = function (action, data) {
     },
     body: JSON.stringify(data.body)
   }
+  console.log(url);
   fetch(url, init)
-    .then((response) => response.json())
+    .then((response) => {
+      response.json();
+      console.log(response);
+    })
     .then((responseJson) => {
       this.setState({message: `${responseJson[0].id} - ${responseJson[0].title}`});
     }).catch(e => {console.log(`error ${e}`,'test---')});

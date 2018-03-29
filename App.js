@@ -77,6 +77,7 @@ export default class App extends Component<Props> {
       body: body,
       method: 'POST'
     }
+    console.log(value);
     if (value) {
       http.httpRequest('/users/login', data);
     }
@@ -105,26 +106,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   button: {
-<<<<<<< HEAD
-    flex:1,
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#FFFFFF',
-=======
     height: 36,
     backgroundColor: '#48BBEC',
     borderColor: '#48BBEC',
->>>>>>> 567688624502f7273c7407c845dd3e5b13e65d11
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
     alignSelf: 'baseline',
-<<<<<<< HEAD
-    justifyContent: 'space-around',
-    width: 10
-=======
     justifyContent: 'center',
     width: 150
->>>>>>> 567688624502f7273c7407c845dd3e5b13e65d11
   }
 });

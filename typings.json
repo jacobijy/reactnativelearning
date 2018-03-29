@@ -1,0 +1,13 @@
+{
+  "globalDependencies": {
+    "moment": "registry:dt/moment#2.11.1+20161010105546",
+    "query-string": "registry:dt/query-string#4.3.0+20170315104407",
+    "redux": "registry:dt/redux#3.5.2+20160703092728",
+    "redux-thunk": "registry:dt/redux-thunk#2.1.0+20160703120921"
+  },
+  "globalDevDependencies": {
+    "mocha": "registry:dt/mocha#2.2.5+20170311011848",
+    "webdriverio": "registry:dt/webdriverio#4.6.0+20170314191220",
+    "webpack-dev-server": "registry:dt/webpack-dev-server#1.12.1+20170117213337"
+  }
+}
