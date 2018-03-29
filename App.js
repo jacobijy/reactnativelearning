@@ -13,10 +13,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 var t = require('tcomb-form-native');
-<<<<<<< HEAD
 var http = require('./utils/http');
-=======
->>>>>>> 567688624502f7273c7407c845dd3e5b13e65d11
 
 var Form = t.form.Form;
 
